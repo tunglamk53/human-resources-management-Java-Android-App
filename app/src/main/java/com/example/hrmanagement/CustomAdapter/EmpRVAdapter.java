@@ -1,4 +1,4 @@
-package com.example.hrmanagement;
+package com.example.hrmanagement.CustomAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.hrmanagement.Entity.Employee;
+import com.example.hrmanagement.R;
 
 import java.util.ArrayList;
 
@@ -27,16 +30,24 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtEmpId.setText(employees.get(position).getEmp_id()+"");
-        holder.txtEmpFName.setText(employees.get(position).getEmp_fname());
-        holder.txtEmpLName.setText(employees.get(position).getEmp_lname());
-        holder.txtEmpPhone.setText(employees.get(position).getEmp_phone()+"");
-        holder.txtEmpAddress.setText(employees.get(position).getEmp_address());
+        try {
+            holder.txtEmpId.setText(employees.get(position).getEmp_id() + "");
+            holder.txtEmpFName.setText(employees.get(position).getEmp_fname());
+            holder.txtEmpLName.setText(employees.get(position).getEmp_lname());
+            holder.txtEmpPhone.setText(employees.get(position).getEmp_phone());
+            holder.txtEmpAddress.setText(employees.get(position).getEmp_address());
+        }catch (Exception e){
+
+        }
     }
 
     @Override
     public int getItemCount() {
-        return employees.size();
+        try {
+            return employees.size();
+        } catch (Exception e){
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -4,22 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmployeeActivity"
+    tools:context=".Activity.EmployeeActivity"
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rViewEmployee"
         android:layout_width="match_parent"
-        android:layout_height="219dp" />
+        android:layout_height="125dp" />
 
     <Button
         android:id="@+id/btnAddEmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD EMPLOYEE"
-        android:layout_gravity="center"
-        android:layout_marginBottom="15dp"/>
-
+        android:layout_gravity="center"/>
 
 
     <EditText
@@ -27,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="FIRST NAME"
-        android:inputType="text"/>
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edtLName1"
@@ -58,30 +56,30 @@
         android:layout_marginBottom="10dp">
 
         <TextView
-            android:layout_width="170dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:text="DEPARTMENT ID"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <Spinner
-            android:id="@+id/spnDep"
+            android:id="@+id/spnDepNames"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="147dp"
+        android:layout_height="57dp"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="105dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:text="JOB TITLE"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <Spinner
-            android:id="@+id/spnJobTitle"
+            android:id="@+id/spnJobTitles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -89,8 +87,11 @@
             android:id="@+id/txtAddJobTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:text="@string/add_job_title_text"
             android:textSize="11dp" />
     </LinearLayout>
+
+    <include layout="@layout/footerlayout"/>
 
 </LinearLayout>

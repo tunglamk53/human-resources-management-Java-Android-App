@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    tools:context=".DepartmentActivity"
+    tools:context=".Activity.DepartmentActivity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rViewDepartment"
         android:layout_width="match_parent"
-        android:layout_height="296dp" />
+        android:layout_height="275dp" />
 
     <Button
         android:id="@+id/btnAddDep"
@@ -33,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="DEPARTMENT LOCATION"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:layout_marginBottom="30dp"/>
 
-
+    <include layout="@layout/footerlayout"/>
 </LinearLayout>

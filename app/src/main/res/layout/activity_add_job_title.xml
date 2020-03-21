@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddJobTitleActivity"
+    tools:context=".Activity.JobTitleActivity"
     android:orientation="vertical">
 
     <EditText
@@ -31,10 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
         android:text="ADD JOB"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:layout_marginBottom="150dp"/>
 
 
-
-
-
+    <include layout="@layout/footerlayout" />
 </LinearLayout>

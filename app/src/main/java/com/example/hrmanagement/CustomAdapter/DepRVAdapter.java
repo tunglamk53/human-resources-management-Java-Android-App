@@ -1,4 +1,4 @@
-package com.example.hrmanagement;
+package com.example.hrmanagement.CustomAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.hrmanagement.Entity.Department;
+import com.example.hrmanagement.R;
 
 import java.util.ArrayList;
 
@@ -34,7 +37,11 @@ public class DepRVAdapter extends RecyclerView.Adapter<DepRVAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return departments.size();
+        try {
+            return departments.size();
+        } catch (Exception e){
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

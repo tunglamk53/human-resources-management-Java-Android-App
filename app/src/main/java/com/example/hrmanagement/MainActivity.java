@@ -1,16 +1,19 @@
 package com.example.hrmanagement;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hrmanagement.Activity.DepartmentActivity;
+import com.example.hrmanagement.Activity.EmployeeActivity;
+import com.example.hrmanagement.DatabaseController.DatabaseOperation;
+
 public class MainActivity extends AppCompatActivity {
 
-    private SQLiteDatabase wdb, rdb;
+//    private SQLiteDatabase wdb, rdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseOperation databaseOperation = new DatabaseOperation(this);
 
-        wdb = databaseOperation.getWritableDatabase();
-        rdb = databaseOperation.getReadableDatabase();
+//        wdb = databaseOperation.getWritableDatabase();
+//        rdb = databaseOperation.getReadableDatabase();
 
         Button btnViewEmp = findViewById(R.id.btnViewEmp);
         btnViewEmp.setOnClickListener(new View.OnClickListener() {
