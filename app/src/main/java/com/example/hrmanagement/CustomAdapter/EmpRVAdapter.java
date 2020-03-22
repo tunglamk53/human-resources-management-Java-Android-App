@@ -1,13 +1,16 @@
 package com.example.hrmanagement.CustomAdapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hrmanagement.Activity.EditEmployeeActivity;
 import com.example.hrmanagement.Entity.Employee;
 import com.example.hrmanagement.R;
 
@@ -51,8 +54,9 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtEmpId, txtEmpFName, txtEmpLName, txtEmpPhone, txtEmpAddress, txtEmpDepName;
+        private Button btnEditEmployee;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtEmpId = itemView.findViewById(R.id.txtEmpId);
@@ -61,6 +65,17 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
             txtEmpPhone = itemView.findViewById(R.id.txtEmpPhone);
             txtEmpAddress = itemView.findViewById(R.id.txtEmpAddress);
             txtEmpDepName = itemView.findViewById(R.id.txtEmpDepName);
+
+            btnEditEmployee = itemView.findViewById(R.id.btnEditEmp);
+            btnEditEmployee.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == btnEditEmployee.getId()){
+                Intent i = new Intent(v.getContext(), EditEmployeeActivity.class);
+                v.getContext().startActivity(i);
+            }
         }
     }
 

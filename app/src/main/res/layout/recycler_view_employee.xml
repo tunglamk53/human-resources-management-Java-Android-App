@@ -39,4 +39,19 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"/>
 
+    <Button
+        android:id="@+id/btnEditEmp"
+        android:layout_width="42dp"
+        android:layout_height="30dp"
+        android:text="EDIT"
+        android:textSize="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtDeleteEmp"
+        android:text='@string/text_delete_employee'
+        android:textSize="8dp"
+        android:layout_marginLeft="2dp"/>
+
 </LinearLayout>
