@@ -24,4 +24,12 @@ public interface SchemaEmployee {
 
     String[] EMPLOYEE_COLUMNS = new String[] { COLUMN_EMP_ID, COLUMN_EMP_FNAME, COLUMN_EMP_LNAME, COLUMN_EMP_PHONE, COLUMN_EMP_ADDRESS };
 
+    String[] EMPLOYEE_COLUMNS_DEP_NAMES = new String[] {
+            TABLE_EMPLOYEE+"."+COLUMN_EMP_ID,
+            TABLE_EMPLOYEE+"."+COLUMN_EMP_FNAME,
+            TABLE_EMPLOYEE+"."+COLUMN_EMP_LNAME,
+            TABLE_EMPLOYEE+"."+COLUMN_EMP_PHONE,
+            TABLE_EMPLOYEE+"."+COLUMN_EMP_ADDRESS,
+            SchemaDepartment.TABLE_DEPARTMENT+"."+SchemaDepartment.COLUMN_DEP_NAME};
+
 }

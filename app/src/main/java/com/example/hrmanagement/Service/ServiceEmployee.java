@@ -18,7 +18,7 @@ public interface ServiceEmployee {
 
     public boolean updateEmployee(Employee employee);
 
-
+    public ArrayList<Employee> fetchAllEmployeesDepNames();
 
 
     public Employee convertCursorToEntity(Cursor cursor);

@@ -29,14 +29,15 @@ import com.example.hrmanagement.MainActivity;
 import com.example.hrmanagement.R;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class EmployeeActivity extends AppCompatActivity {
 
     private SQLiteDatabase wdb, rdb;
     private DatabaseOperation databaseOperation;
     private RecyclerView recyclerView;
-    private ArrayList<Employee> employees;
     private EmpRVAdapter empRVAdapter;
+    ArrayList<Employee> empDepNamesList;
     private DBHelperEmployee dbHelperEmployee;
     private DBHelperDepartment dbHelperDepartment;
     private DBHelperJob dbHelperJob;
@@ -44,7 +45,7 @@ public class EmployeeActivity extends AppCompatActivity {
     private Spinner spnDepNames, spnJobTitles;
 
 
-
+//-----------------------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class EmployeeActivity extends AppCompatActivity {
 
         dbHelperEmployee = new DBHelperEmployee(rdb);
 
+        //Get All Employee Table and display to Recycler View
         displayRVEmployeeTable();
 
 
@@ -66,11 +68,12 @@ public class EmployeeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Employee employee = getEmployeeFromEditText();
                 long empId = dbHelperEmployee.addEmployee(employee);
-                displayRVEmployeeTable();
 
                 //Add Data to FactTable
                 if(empId!=-1)
                     addDataToFactTable(empId);
+
+                displayRVEmployeeTable();
             }
         });
 
@@ -96,7 +99,7 @@ public class EmployeeActivity extends AppCompatActivity {
 
         //Spinner for Job Title
         spnJobTitles = findViewById(R.id.spnJobTitles);
-        ArrayList<String> jobTitles = getJobTitles(); Log.d("jobtitles", jobTitles.toString());
+        ArrayList<String> jobTitles = getJobTitles();
         ArrayAdapter<String> adapterJobTitles = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, jobTitles);
         spnJobTitles.setAdapter(adapterJobTitles);
 
@@ -109,7 +112,20 @@ public class EmployeeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
     }
+//-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------------------------------------
 
     private void addDataToFactTable(long empId) {
         String selectedDep = spnDepNames.getSelectedItem().toString();
@@ -152,9 +168,11 @@ public class EmployeeActivity extends AppCompatActivity {
         return depNames;
     }
 
+
+
     private void displayRVEmployeeTable() {
-        employees = dbHelperEmployee.fetchAllEmployees();
-        setRVAdapterEmployee(employees);
+        empDepNamesList = dbHelperEmployee.fetchAllEmployeesDepNames();
+        setRVAdapterEmployee(empDepNamesList);
     }
 
     private void setRVAdapterEmployee(ArrayList<Employee> employees) {
@@ -163,6 +181,8 @@ public class EmployeeActivity extends AppCompatActivity {
         recyclerView.setAdapter(empRVAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
+
+
 
     private Employee getEmployeeFromEditText() {
         EditText tv1 = findViewById(R.id.edtFName1);
