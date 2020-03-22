@@ -60,7 +60,6 @@ public class EmployeeActivity extends AppCompatActivity {
         //Get All Employee Table and display to Recycler View
         displayRVEmployeeTable();
 
-
         //Button Add an Employee
         Button btnAddEmp = findViewById(R.id.btnAddEmp);
         btnAddEmp.setOnClickListener(new View.OnClickListener() {
@@ -71,9 +70,11 @@ public class EmployeeActivity extends AppCompatActivity {
 
                 //Add Data to FactTable
                 if(empId!=-1)
+
                     addDataToFactTable(empId);
 
                 displayRVEmployeeTable();
+
             }
         });
 
@@ -104,6 +105,9 @@ public class EmployeeActivity extends AppCompatActivity {
         spnJobTitles.setAdapter(adapterJobTitles);
 
 
+
+
+
         Button btnFooter = findViewById(R.id.btnFooter);
         btnFooter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +116,9 @@ public class EmployeeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+
 
 
     }

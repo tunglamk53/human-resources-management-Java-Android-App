@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HR Management</string>
     <string name="add_job_title_text">(Not found the job title)\n<u>Click here to add new a new Job title</u>.</string>
+    <string name="text_delete_employee"><u>DELETE</u>.</string>
 </resources>
