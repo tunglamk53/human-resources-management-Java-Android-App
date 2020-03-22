@@ -36,6 +36,7 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
             holder.txtEmpLName.setText(employees.get(position).getEmp_lname());
             holder.txtEmpPhone.setText(employees.get(position).getEmp_phone());
             holder.txtEmpAddress.setText(employees.get(position).getEmp_address());
+            holder.txtEmpDepName.setText(employees.get(position).getEmp_DepName());
         }catch (Exception e){
 
         }
@@ -51,7 +52,7 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtEmpId, txtEmpFName, txtEmpLName, txtEmpPhone, txtEmpAddress;
+        private TextView txtEmpId, txtEmpFName, txtEmpLName, txtEmpPhone, txtEmpAddress, txtEmpDepName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtEmpId = itemView.findViewById(R.id.txtEmpId);
@@ -59,6 +60,7 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
             txtEmpLName = itemView.findViewById(R.id.txtEmpLName);
             txtEmpPhone = itemView.findViewById(R.id.txtEmpPhone);
             txtEmpAddress = itemView.findViewById(R.id.txtEmpAddress);
+            txtEmpDepName = itemView.findViewById(R.id.txtEmpDepName);
         }
     }
 

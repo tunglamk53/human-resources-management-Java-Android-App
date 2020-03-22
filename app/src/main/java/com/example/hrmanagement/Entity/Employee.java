@@ -4,6 +4,8 @@ public class Employee {
     private int emp_id;
     private String emp_fname, emp_lname, emp_address, emp_phone;
 
+    private String dep_name;
+
     //To Add Employee
     public Employee(String emp_fname, String emp_lname, String emp_phone, String emp_address) {
         this.emp_phone = emp_phone;
@@ -19,6 +21,15 @@ public class Employee {
         this.emp_fname = emp_fname;
         this.emp_lname = emp_lname;
         this.emp_address = emp_address;
+    }
+
+    public Employee(int emp_id, String emp_fname, String emp_lname, String emp_phone, String emp_address, String dep_name) {
+        this.emp_id = emp_id;
+        this.emp_phone = emp_phone;
+        this.emp_fname = emp_fname;
+        this.emp_lname = emp_lname;
+        this.emp_address = emp_address;
+        this.dep_name = dep_name;
     }
 
     public int getEmp_id() {
@@ -41,6 +52,10 @@ public class Employee {
         return emp_address;
     }
 
+    public String getEmp_DepName() {
+        return dep_name;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -49,6 +64,7 @@ public class Employee {
                 ", emp_fname='" + emp_fname + '\'' +
                 ", emp_lname='" + emp_lname + '\'' +
                 ", emp_address='" + emp_address + '\'' +
+                ", emp_department='" + dep_name + '\'' +
                 '}';
     }
 }
