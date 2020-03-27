@@ -66,6 +66,7 @@ public class EmployeeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Employee employee = getEmployeeFromEditText();
+                //Add Employee to EmployeeTable, return emId, return -1 if not added
                 long empId = dbHelperEmployee.addEmployee(employee);
 
                 //Add Data to FactTable
@@ -135,13 +136,16 @@ public class EmployeeActivity extends AppCompatActivity {
 //------------------------------------------------------------------------------------------------------------
 
     private void addDataToFactTable(long empId) {
+        //Add DepartmentId
         String selectedDep = spnDepNames.getSelectedItem().toString();
         String selectedDepId = selectedDep.split(" - ")[0];
-
+        //Add JobId
         String selectedJob = spnJobTitles.getSelectedItem().toString();
         String selectedJobId = selectedJob.split(" - ")[0];
+        //Add Active Status for EmploymentStatus
+        int activeStatus = 1;
 
-        Fact fact = new Fact((int)empId, Integer.parseInt(selectedDepId), Integer.parseInt(selectedJobId));
+        Fact fact = new Fact((int)empId, Integer.parseInt(selectedDepId), Integer.parseInt(selectedJobId), activeStatus);
 
         dbHelperFact = new DBHelperFact(wdb);
         dbHelperFact.addFact(fact);

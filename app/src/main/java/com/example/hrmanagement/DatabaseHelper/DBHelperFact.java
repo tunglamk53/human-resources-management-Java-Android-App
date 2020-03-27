@@ -26,8 +26,26 @@ public class DBHelperFact implements ServiceFact {
     }
 
     @Override
-    public Fact fetchJobByIds(int emp_id, int dep_id, int doc_id, int job_id) {
-        return null;
+    public Fact fetchFactByIds(int emp_id) {
+        Fact fact = null;
+        try {
+            cursor = mDb.query(
+                    SchemaFact.TABLE_FACT,
+                    SchemaFact.FACT_COLUMNS,
+                    SchemaEmployee.COLUMN_EMP_ID + " = ?",
+                    new String[] { String.valueOf(emp_id) },
+                    null, null,
+                    SchemaEmployee.COLUMN_EMP_ID);
+
+            if (cursor != null) {
+                cursor.moveToFirst();
+                fact = convertCursorToEntity(cursor);
+                cursor.close();
+            }
+            return fact;
+        } catch (Exception e){
+            return null;
+        }
     }
 
     @Override
@@ -54,7 +72,12 @@ public class DBHelperFact implements ServiceFact {
     @Override
     public boolean updateFact(Fact fact) {
         return false;
+    }
 
+    public void updateFactEmpStatus (int emp_id, int employment_status) {
+        ContentValues statusValues = new ContentValues();
+        statusValues.put(SchemaFact.COLUMN_FACT_EMP_STATUS, employment_status);
+        mDb.update(SchemaFact.TABLE_FACT, statusValues, SchemaEmployee.COLUMN_EMP_ID + " = ?", new String[] { String.valueOf(emp_id) });
     }
 
     public Fact convertCursorToEntity(Cursor cursor) {

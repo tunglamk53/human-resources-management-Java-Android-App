@@ -32,7 +32,7 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         try {
             holder.txtEmpId.setText(employees.get(position).getEmp_id() + "");
             holder.txtEmpFName.setText(employees.get(position).getEmp_fname());
@@ -40,6 +40,23 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
             holder.txtEmpPhone.setText(employees.get(position).getEmp_phone());
             holder.txtEmpAddress.setText(employees.get(position).getEmp_address());
             holder.txtEmpDepName.setText(employees.get(position).getEmp_DepName());
+
+            holder.btnEditEmployee.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), EditEmployeeActivity.class);
+
+                    i.putExtra("extEmpId", employees.get(position).getEmp_id() + "");
+                    i.putExtra("extEmpFName", employees.get(position).getEmp_fname());
+                    i.putExtra("extEmpLName", employees.get(position).getEmp_lname());
+                    i.putExtra("extEmpPhone", employees.get(position).getEmp_phone());
+                    i.putExtra("extEmpAddress", employees.get(position).getEmp_address());
+                    i.putExtra("extEmpDepName", employees.get(position).getEmp_DepName());
+
+
+                    v.getContext().startActivity(i);
+                }
+            });
         }catch (Exception e){
 
         }
@@ -54,8 +71,9 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView txtEmpId, txtEmpFName, txtEmpLName, txtEmpPhone, txtEmpAddress, txtEmpDepName;
+//    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ViewHolder extends RecyclerView.ViewHolder {
+    private TextView txtEmpId, txtEmpFName, txtEmpLName, txtEmpPhone, txtEmpAddress, txtEmpDepName;
         private Button btnEditEmployee;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,17 +84,18 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
             txtEmpAddress = itemView.findViewById(R.id.txtEmpAddress);
             txtEmpDepName = itemView.findViewById(R.id.txtEmpDepName);
 
+            //set up BUTTON Edit Employee Info
             btnEditEmployee = itemView.findViewById(R.id.btnEditEmp);
-            btnEditEmployee.setOnClickListener(this);
+//            btnEditEmployee.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            if(v.getId() == btnEditEmployee.getId()){
-                Intent i = new Intent(v.getContext(), EditEmployeeActivity.class);
-                v.getContext().startActivity(i);
-            }
-        }
+//        @Override
+//        public void onClick(View v) {
+//            if(v.getId() == btnEditEmployee.getId()){ // get the BUTTON Edit Employee Info
+//                Intent i = new Intent(v.getContext(), EditEmployeeActivity.class);
+//                v.getContext().startActivity(i);
+//            }
+//        }
     }
 
 

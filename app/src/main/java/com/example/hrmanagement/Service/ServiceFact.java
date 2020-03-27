@@ -8,7 +8,8 @@ import com.example.hrmanagement.Entity.Fact;
 import java.util.ArrayList;
 
 public interface ServiceFact {
-    public Fact fetchJobByIds(int emp_id, int dep_id, int doc_id, int job_id);
+
+    public Fact fetchFactByIds(int emp_id);
 
     public ArrayList<Fact> fetchAllFacts();
 
