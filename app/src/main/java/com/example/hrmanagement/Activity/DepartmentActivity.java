@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hrmanagement.CustomAdapter.DepRVAdapter;
-import com.example.hrmanagement.DatabaseController.DatabaseOperation;
+import com.example.hrmanagement.DatabaseController.DatabaseInitialization;
 import com.example.hrmanagement.DatabaseHelper.DBHelperDepartment;
 import com.example.hrmanagement.Entity.Department;
 import com.example.hrmanagement.MainActivity;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class DepartmentActivity extends AppCompatActivity {
 
     private SQLiteDatabase wdb, rdb;
-    private DatabaseOperation databaseOperation;
+    private DatabaseInitialization databaseInitialization;
     private RecyclerView recyclerView;
     private ArrayList<Department> departments;
     private DepRVAdapter depRVAdapter;
@@ -34,9 +34,9 @@ public class DepartmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_department);
 
-        databaseOperation = new DatabaseOperation(this);
-        wdb = databaseOperation.getWritableDatabase();
-        rdb = databaseOperation.getReadableDatabase();
+        databaseInitialization = new DatabaseInitialization(this);
+        wdb = databaseInitialization.getWritableDatabase();
+        rdb = databaseInitialization.getReadableDatabase();
 
         dbHelperDepartment = new DBHelperDepartment(rdb);
 

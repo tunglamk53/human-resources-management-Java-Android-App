@@ -5,28 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
-import com.example.hrmanagement.DatabaseController.DatabaseOperation;
+import com.example.hrmanagement.DatabaseController.DatabaseInitialization;
 import com.example.hrmanagement.DatabaseHelper.DBHelperFact;
 import com.example.hrmanagement.Entity.Fact;
 import com.example.hrmanagement.MainActivity;
 import com.example.hrmanagement.R;
 
-import java.util.ArrayList;
-
 public class EditEmployeeActivity extends AppCompatActivity {
 
     private EditText edtFName, edtLName, edtPhone, edtAddress, edtSalary, edtHourlyRate;
     private TextView txtEmpId, txtDepName, txtJob;
-    private DatabaseOperation databaseOperation;
+    private DatabaseInitialization databaseInitialization;
     private DBHelperFact dbHelperFact;
     private SQLiteDatabase wdb, rdb;
     private final int ACTIVE = 1, INACTIVE = 0;
@@ -62,9 +58,9 @@ public class EditEmployeeActivity extends AppCompatActivity {
 
 
 
-        databaseOperation = new DatabaseOperation(this);
-        wdb = databaseOperation.getWritableDatabase();
-        rdb = databaseOperation.getReadableDatabase();
+        databaseInitialization = new DatabaseInitialization(this);
+        wdb = databaseInitialization.getWritableDatabase();
+        rdb = databaseInitialization.getReadableDatabase();
 
         dbHelperFact = new DBHelperFact(wdb);
 
