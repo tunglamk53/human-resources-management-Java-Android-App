@@ -5,10 +5,11 @@ public class Fact {
     int employment_status; // 0 = Quited; 1 = Active.
     double salary, hourly_rate;
 
-    public Fact(int emp_id, int dep_id, int job_id) {
+    public Fact(int emp_id, int dep_id, int job_id, int employment_status) {
         this.emp_id = emp_id;
         this.dep_id = dep_id;
         this.job_id = job_id;
+        this.employment_status = employment_status;
     }
 
     public Fact(int emp_id, int dep_id, int doc_id, int job_id, double salary, double hourly_rate, int employment_status) {
@@ -47,5 +48,19 @@ public class Fact {
 
     public double getHourly_rate() {
         return hourly_rate;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Fact{" +
+                "emp_id=" + emp_id +
+                ", dep_id=" + dep_id +
+                ", doc_id=" + doc_id +
+                ", job_id=" + job_id +
+                ", employment_status=" + employment_status +
+                ", salary=" + salary +
+                ", hourly_rate=" + hourly_rate +
+                '}';
     }
 }

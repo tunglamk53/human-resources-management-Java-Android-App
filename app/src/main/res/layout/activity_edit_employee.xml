@@ -20,13 +20,30 @@
         <TextView
             android:id="@+id/txtEditEmpId"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Employment Status:"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Employment Status:"/>
+
+        <Switch
+            android:id="@+id/swiEditEmpStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -114,6 +131,23 @@
             android:hint="Salary" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hourly Rate:" />
+
+        <EditText
+            android:id="@+id/edtEditHourlyRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Hourly Rate" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -129,13 +163,16 @@
             android:id="@+id/txtEditEmpDepartment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DEP" />
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/btnEditEmpDep"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EDIT DEPARTMENT" />
+            android:layout_height="30dp"
+            android:textSize="8dp"
+            android:text="UPDATE DEPARTMENT" />
     </LinearLayout>
 
 
@@ -158,8 +195,9 @@
         <Button
             android:id="@+id/btnEditEmpJob"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EDIT JOB" />
+            android:layout_height="30dp"
+            android:textSize="8dp"
+            android:text="UPDATE JOB" />
     </LinearLayout>
 
 

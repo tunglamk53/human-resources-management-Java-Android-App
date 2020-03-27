@@ -41,9 +41,9 @@
 
     <Button
         android:id="@+id/btnEditEmp"
-        android:layout_width="42dp"
+        android:layout_width="56dp"
         android:layout_height="30dp"
-        android:text="EDIT"
+        android:text="DETAILS"
         android:textSize="8dp" />
 
     <TextView
