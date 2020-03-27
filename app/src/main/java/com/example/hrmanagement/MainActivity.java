@@ -1,6 +1,7 @@
 package com.example.hrmanagement;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,37 +10,39 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hrmanagement.Activity.DepartmentActivity;
 import com.example.hrmanagement.Activity.EmployeeActivity;
+import com.example.hrmanagement.DatabaseController.AsyncTaskHelper;
 import com.example.hrmanagement.DatabaseController.DatabaseOperation;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private SQLiteDatabase wdb, rdb;
+    private SQLiteDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //Open the Database
         DatabaseOperation databaseOperation = new DatabaseOperation(this);
+        mDb = databaseOperation.openDb();
 
-//        wdb = databaseOperation.getWritableDatabase();
-//        rdb = databaseOperation.getReadableDatabase();
 
+        //Button View Employees
         Button btnViewEmp = findViewById(R.id.btnViewEmp);
         btnViewEmp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, EmployeeActivity.class);
-                startActivity(i);
+                startActivity(new Intent(MainActivity.this, EmployeeActivity.class));
             }
         });
 
+        //Button View Departments
         Button btnViewDep = findViewById(R.id.btnViewDep);
         btnViewDep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, DepartmentActivity.class);
-                startActivity(i);
+                startActivity(new Intent(MainActivity.this, DepartmentActivity.class));
             }
         });
     }

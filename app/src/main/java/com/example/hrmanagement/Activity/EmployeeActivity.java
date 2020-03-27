@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hrmanagement.CustomAdapter.EmpRVAdapter;
+import com.example.hrmanagement.DatabaseController.DatabaseInitialization;
 import com.example.hrmanagement.DatabaseController.DatabaseOperation;
 import com.example.hrmanagement.DatabaseHelper.DBHelperDepartment;
 import com.example.hrmanagement.DatabaseHelper.DBHelperEmployee;
@@ -29,12 +30,10 @@ import com.example.hrmanagement.MainActivity;
 import com.example.hrmanagement.R;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class EmployeeActivity extends AppCompatActivity {
 
-    private SQLiteDatabase wdb, rdb;
-    private DatabaseOperation databaseOperation;
+    private SQLiteDatabase mDb;
     private RecyclerView recyclerView;
     private EmpRVAdapter empRVAdapter;
     ArrayList<Employee> empDepNamesList;
@@ -51,11 +50,16 @@ public class EmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
 
-        databaseOperation = new DatabaseOperation(this);
-        wdb = databaseOperation.getWritableDatabase();
-        rdb = databaseOperation.getReadableDatabase();
+//        databaseInitialization = new DatabaseInitialization(this);
+//        wdb = databaseInitialization.getWritableDatabase();
+//        rdb = databaseInitialization.getReadableDatabase();
 
-        dbHelperEmployee = new DBHelperEmployee(rdb);
+        //Open Database
+        DatabaseOperation databaseOperation = new DatabaseOperation(this);
+        mDb = databaseOperation.openDb();
+
+        //Initialize Employee Database Helper
+        dbHelperEmployee = new DBHelperEmployee(mDb);
 
         //Get All Employee Table and display to Recycler View
         displayRVEmployeeTable();
@@ -71,11 +75,10 @@ public class EmployeeActivity extends AppCompatActivity {
 
                 //Add Data to FactTable
                 if(empId!=-1)
-
                     addDataToFactTable(empId);
 
+                //Get All Employee Table and display to Recycler View
                 displayRVEmployeeTable();
-
             }
         });
 
@@ -93,8 +96,7 @@ public class EmployeeActivity extends AppCompatActivity {
         txtAddJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(EmployeeActivity.this, JobTitleActivity.class);
-                startActivity(i);
+                startActivity(new Intent(EmployeeActivity.this, JobTitleActivity.class));
             }
         });
 
@@ -108,13 +110,12 @@ public class EmployeeActivity extends AppCompatActivity {
 
 
 
-
+        //Button BackToMainMenu
         Button btnFooter = findViewById(R.id.btnFooter);
         btnFooter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(EmployeeActivity.this, MainActivity.class);
-                startActivity(i);
+                startActivity(new Intent(EmployeeActivity.this, MainActivity.class));
             }
         });
 
@@ -122,8 +123,8 @@ public class EmployeeActivity extends AppCompatActivity {
 
 
 
-    }
-//-----------------------------------------------------------------------------------------------------------
+    }//-----------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -134,7 +135,6 @@ public class EmployeeActivity extends AppCompatActivity {
 
 
 //------------------------------------------------------------------------------------------------------------
-
     private void addDataToFactTable(long empId) {
         //Add DepartmentId
         String selectedDep = spnDepNames.getSelectedItem().toString();
@@ -147,13 +147,18 @@ public class EmployeeActivity extends AppCompatActivity {
 
         Fact fact = new Fact((int)empId, Integer.parseInt(selectedDepId), Integer.parseInt(selectedJobId), activeStatus);
 
-        dbHelperFact = new DBHelperFact(wdb);
+        //Initialize Fact Database Helper
+        dbHelperFact = new DBHelperFact(mDb);
+
+        //Add Data to Fact Table
         dbHelperFact.addFact(fact);
     }
 
     private ArrayList<String> getJobTitles() {
         ArrayList<String> jobTitles = new ArrayList<>();
-        dbHelperJob = new DBHelperJob(rdb);
+
+        //Initialize Job Database Helper
+        dbHelperJob = new DBHelperJob(mDb);
         ArrayList<Job> jobList = dbHelperJob.fetchAllJobs();
 
         if(jobList!=null) {
@@ -168,7 +173,9 @@ public class EmployeeActivity extends AppCompatActivity {
 
     private ArrayList<String> getDepNames() {
         ArrayList<String> depNames = new ArrayList<>();
-        dbHelperDepartment = new DBHelperDepartment(rdb);
+
+        //Initialize Department Database Helper
+        dbHelperDepartment = new DBHelperDepartment(mDb);
         ArrayList<Department> departmentList = dbHelperDepartment.fetchAllDepartments();
 
         if(departmentList!=null) {
