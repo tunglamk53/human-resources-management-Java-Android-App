@@ -3,7 +3,6 @@ package com.example.hrmanagement.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hrmanagement.CustomAdapter.EmpRVAdapter;
-import com.example.hrmanagement.DatabaseController.DatabaseInitialization;
 import com.example.hrmanagement.DatabaseController.DatabaseOperation;
 import com.example.hrmanagement.DatabaseHelper.DBHelperDepartment;
 import com.example.hrmanagement.DatabaseHelper.DBHelperEmployee;
@@ -50,10 +48,6 @@ public class EmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
 
-//        databaseInitialization = new DatabaseInitialization(this);
-//        wdb = databaseInitialization.getWritableDatabase();
-//        rdb = databaseInitialization.getReadableDatabase();
-
         //Open Database
         DatabaseOperation databaseOperation = new DatabaseOperation(this);
         mDb = databaseOperation.openDb();
@@ -69,7 +63,9 @@ public class EmployeeActivity extends AppCompatActivity {
         btnAddEmp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Get Employee from EditTexts
                 Employee employee = getEmployeeFromEditText();
+
                 //Add Employee to EmployeeTable, return emId, return -1 if not added
                 long empId = dbHelperEmployee.addEmployee(employee);
 

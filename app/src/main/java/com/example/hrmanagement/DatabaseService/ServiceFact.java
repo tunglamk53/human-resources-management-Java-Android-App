@@ -1,4 +1,4 @@
-package com.example.hrmanagement.Service;
+package com.example.hrmanagement.DatabaseService;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface ServiceFact {
 
-    public Fact fetchFactByIds(int emp_id);
+    public Fact fetchFactById(int emp_id);
 
     public ArrayList<Fact> fetchAllFacts();
 

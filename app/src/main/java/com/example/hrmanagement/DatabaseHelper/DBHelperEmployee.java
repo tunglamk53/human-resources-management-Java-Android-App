@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.hrmanagement.Entity.Employee;
-import com.example.hrmanagement.Service.ServiceEmployee;
+import com.example.hrmanagement.DatabaseService.ServiceEmployee;
 import com.example.hrmanagement.TableSchema.SchemaDepartment;
 import com.example.hrmanagement.TableSchema.SchemaEmployee;
 import com.example.hrmanagement.TableSchema.SchemaFact;
@@ -17,22 +17,40 @@ import java.util.ArrayList;
 
 public class DBHelperEmployee implements ServiceEmployee {
 
+    //Initialize Parameters
     private SQLiteDatabase mDb;
     private Cursor cursor;
     private ContentValues mValues;
 
-
+    //Employee Constructor
     public DBHelperEmployee(SQLiteDatabase db) {
         this.mDb = db;
     }
 
-
-
+    //Fetch An Employee by Id
     @Override
     public Employee fetchEmployeeById(int employeeId) {
-        return null;
+        Employee employee = null;
+        try {
+            cursor = mDb.query(
+                    SchemaEmployee.TABLE_EMPLOYEE,
+                    SchemaEmployee.EMPLOYEE_COLUMNS,
+                    SchemaEmployee.COLUMN_EMP_ID + " = ?",
+                    new String[] { String.valueOf(employeeId) },
+                    null, null, null);
+
+            if (cursor != null) {
+                cursor.moveToFirst();
+                employee = convertCursorToEntity(cursor);
+                cursor.close();
+            }
+            return employee;
+        } catch (Exception e){
+            return null;
+        }
     }
 
+    //Fetch All Employees
     @Override
     public ArrayList<Employee> fetchAllEmployees() {
         ArrayList<Employee> employeeList = new ArrayList<>();
@@ -57,34 +75,35 @@ public class DBHelperEmployee implements ServiceEmployee {
         }
     }
 
-
-
+    //Add An Employee
     @Override
     public long addEmployee(Employee employee) {
         setContentValues(employee);
         try{
             return mDb.insert(SchemaEmployee.TABLE_EMPLOYEE, null, getContentValues());
         }catch (SQLException e) {
-            Log.w("Database", e.getMessage());
             return -1;
         }
     }
 
-
-
-
+    //Delete An Employee by Id
     @Override
     public boolean deleteEmployee(int employeeId) {
         return false;
     }
 
+    //Update New Employee Information
     @Override
-    public boolean updateEmployee(Employee employee) {
-        return false;
+    public void updateEmployee(Employee newEmployeeInfo) {
+        setContentValues(newEmployeeInfo);
+        mDb.update(
+                SchemaEmployee.TABLE_EMPLOYEE,
+                getContentValues(),
+                SchemaEmployee.COLUMN_EMP_ID + " = ? ",
+                new String[] { String.valueOf(newEmployeeInfo.getEmp_id()) });
     }
 
-
-    //Fetch all Employees + Departments
+    //Fetch all Employees (and Employees's Departments)
     @Override
     public ArrayList<Employee> fetchAllEmployeesDepNames() {
         ArrayList<Employee> employeeList = new ArrayList<>();
@@ -118,7 +137,7 @@ public class DBHelperEmployee implements ServiceEmployee {
 
 
 
-
+    //Convert Cursor to An Employee
     public Employee convertCursorToEntity(Cursor cursor) {
         if(cursor.getColumnCount() == SchemaEmployee.EMPLOYEE_COLUMNS.length) {
             Employee employee =
@@ -147,6 +166,7 @@ public class DBHelperEmployee implements ServiceEmployee {
         }
     }
 
+    //Set Content Values
     public void setContentValues(Employee employee) {
         mValues = new ContentValues();
         mValues.put(SchemaEmployee.COLUMN_EMP_FNAME, employee.getEmp_fname());
@@ -154,7 +174,7 @@ public class DBHelperEmployee implements ServiceEmployee {
         mValues.put(SchemaEmployee.COLUMN_EMP_PHONE, employee.getEmp_phone());
         mValues.put(SchemaEmployee.COLUMN_EMP_ADDRESS, employee.getEmp_address());
     }
-
+    //Get Content Values
     public ContentValues getContentValues() {
         return mValues;
     }

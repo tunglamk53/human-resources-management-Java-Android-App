@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
 import com.example.hrmanagement.Entity.Fact;
-import com.example.hrmanagement.Service.ServiceFact;
+import com.example.hrmanagement.DatabaseService.ServiceFact;
 import com.example.hrmanagement.TableSchema.SchemaDepartment;
 import com.example.hrmanagement.TableSchema.SchemaDocument;
 import com.example.hrmanagement.TableSchema.SchemaEmployee;
@@ -17,16 +17,19 @@ import java.util.ArrayList;
 
 public class DBHelperFact implements ServiceFact {
 
+    //Initialize Parameters
     private SQLiteDatabase mDb;
     private Cursor cursor;
     private ContentValues mValues;
 
+    //Fact Constructor
     public DBHelperFact(SQLiteDatabase db) {
         this.mDb = db;
     }
 
+    //Fetch All Facts
     @Override
-    public Fact fetchFactByIds(int emp_id) {
+    public Fact fetchFactById(int emp_id) {
         Fact fact = null;
         try {
             cursor = mDb.query(
@@ -54,6 +57,15 @@ public class DBHelperFact implements ServiceFact {
     }
 
     @Override
+    public boolean updateFact(Fact fact) { return false; }
+
+    @Override
+    public boolean deleteFact(int emp_id, int dep_id, int doc_id, int job_id) {
+        return false;
+    }
+
+    //Add a Fact
+    @Override
     public boolean addFact(Fact fact) {
         setContentValues(fact);
         try{
@@ -64,21 +76,23 @@ public class DBHelperFact implements ServiceFact {
         }
     }
 
-    @Override
-    public boolean deleteFact(int emp_id, int dep_id, int doc_id, int job_id) {
-        return false;
+    //Update Salary and Hourly Rate by EmployeeId on Fact Table
+    public void updateFactSalaryAndRate(int emp_id, double salary, double hourlyRate) {
+        ContentValues values = new ContentValues();
+        values.put(SchemaFact.COLUMN_FACT_SALARY, salary);
+        values.put(SchemaFact.COLUMN_FACT_HOURLY_RATE, hourlyRate);
+        mDb.update(SchemaFact.TABLE_FACT, values, SchemaEmployee.COLUMN_EMP_ID + " = ? ", new String[] { String.valueOf(emp_id) });
     }
 
-    @Override
-    public boolean updateFact(Fact fact) {
-        return false;
-    }
-
+    //Update Employment Status by EmployeeId on Fact Table
     public void updateFactEmpStatus (int emp_id, int employment_status) {
         ContentValues statusValues = new ContentValues();
         statusValues.put(SchemaFact.COLUMN_FACT_EMP_STATUS, employment_status);
         mDb.update(SchemaFact.TABLE_FACT, statusValues, SchemaEmployee.COLUMN_EMP_ID + " = ?", new String[] { String.valueOf(emp_id) });
     }
+
+
+
 
     public Fact convertCursorToEntity(Cursor cursor) {
         Fact fact = new Fact(

@@ -1,4 +1,4 @@
-package com.example.hrmanagement.Service;
+package com.example.hrmanagement.DatabaseService;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public interface ServiceJob {
     public Job fetchJobById(int jobId);
+
+    public Job fetchJobByEmpId(int empId);
 
     public ArrayList<Job> fetchAllJobs();
 
