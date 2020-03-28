@@ -1,4 +1,4 @@
-package com.example.hrmanagement.Service;
+package com.example.hrmanagement.DatabaseService;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -16,7 +16,7 @@ public interface ServiceEmployee {
 
     public boolean deleteEmployee(int employeeId);
 
-    public boolean updateEmployee(Employee employee);
+    public void updateEmployee(Employee employee);
 
     public ArrayList<Employee> fetchAllEmployeesDepNames();
 

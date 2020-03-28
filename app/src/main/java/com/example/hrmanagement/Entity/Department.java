@@ -1,8 +1,8 @@
 package com.example.hrmanagement.Entity;
 
 public class Department {
-    private int dep_id;
-    private String dep_name, dep_location;
+    int dep_id;
+    String dep_name, dep_location;
 
     public Department(String dep_name, String dep_location) {
         this.dep_name = dep_name;

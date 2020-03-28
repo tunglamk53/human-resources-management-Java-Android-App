@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrmanagement.Activity.EditEmployeeActivity;
+import com.example.hrmanagement.Activity.UpdateEmployeeActivity;
 import com.example.hrmanagement.Entity.Employee;
 import com.example.hrmanagement.R;
 
@@ -44,7 +44,7 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
             holder.btnEditEmployee.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(), EditEmployeeActivity.class);
+                    Intent i = new Intent(v.getContext(), UpdateEmployeeActivity.class);
 
                     i.putExtra("extEmpId", employees.get(position).getEmp_id() + "");
                     i.putExtra("extEmpFName", employees.get(position).getEmp_fname());

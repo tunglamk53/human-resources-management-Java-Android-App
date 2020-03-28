@@ -6,28 +6,55 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.hrmanagement.Entity.Job;
-import com.example.hrmanagement.Service.ServiceJob;
+import com.example.hrmanagement.DatabaseService.ServiceJob;
+import com.example.hrmanagement.TableSchema.SchemaEmployee;
+import com.example.hrmanagement.TableSchema.SchemaFact;
 import com.example.hrmanagement.TableSchema.SchemaJob;
 
 import java.util.ArrayList;
 
 public class DBHelperJob implements ServiceJob {
 
+    //Initialize Parameters
     private SQLiteDatabase mDb;
     private Cursor cursor;
     private ContentValues mValues;
 
+    //Job Constructor
     public DBHelperJob(SQLiteDatabase db) {
         this.mDb = db;
     }
 
+    @Override
+    public Job fetchJobById(int jobId) { return null; }
 
 
     @Override
-    public Job fetchJobById(int jobId) {
-        return null;
+    public Job fetchJobByEmpId(int empId) {
+        Job job = null;
+        try{
+            cursor = mDb.query(
+                    SchemaFact.TABLE_FACT + " INNER JOIN " + SchemaJob.TABLE_JOB + " ON " +
+                            SchemaFact.TABLE_FACT + "." + SchemaJob.COLUMN_JOB_ID + "=" + SchemaJob.TABLE_JOB + "." + SchemaJob.COLUMN_JOB_ID,
+//                    "TAB_FACT.job_id=TAB_JOB.job_id",
+                    new String[] { SchemaJob.TABLE_JOB + "." + SchemaJob.COLUMN_JOB_ID, SchemaJob.TABLE_JOB + "." + SchemaJob.COLUMN_JOB_TITLE, SchemaJob.TABLE_JOB + "." + SchemaJob.COLUMN_JOB_DESCRIPTION},
+                    SchemaFact.TABLE_FACT + "." + SchemaEmployee.COLUMN_EMP_ID + " = ? ",
+                    new String[] { String.valueOf(empId) },
+                    null, null, null
+            );
+
+            if(cursor != null) {
+                cursor.moveToFirst();
+                job = convertCursorToEntity(cursor);
+            }
+            cursor.close();
+            return job;
+        }catch (Exception e) {
+            return null;
+        }
     }
 
+    //Fetch All Jobs
     @Override
     public ArrayList<Job> fetchAllJobs() {
         ArrayList<Job> jobList = new ArrayList<>();
@@ -52,6 +79,7 @@ public class DBHelperJob implements ServiceJob {
         }
     }
 
+    //Add An Job
     @Override
     public boolean addJob(Job job) {
         setContentValues(job);

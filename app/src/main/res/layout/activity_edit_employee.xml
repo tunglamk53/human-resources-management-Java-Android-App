@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.EditEmployeeActivity"
+    tools:context=".Activity.UpdateEmployeeActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -149,15 +149,15 @@
     </LinearLayout>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Department:" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Department:" />
 
         <TextView
             android:id="@+id/txtEditEmpDepartment"
@@ -176,21 +176,23 @@
     </LinearLayout>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Job Title:" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Job Title:" />
-
-        <TextView
             android:id="@+id/txtEditEmpJob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="JOB TITLE + DESCRIPTION" />
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/btnEditEmpJob"
@@ -200,6 +202,14 @@
             android:text="UPDATE JOB" />
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/btnUpdateEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="UPDATE INFO" />
 
     <include layout="@layout/footerlayout"/>
 
