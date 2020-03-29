@@ -34,25 +34,21 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         try {
-            holder.txtEmpId.setText(employees.get(position).getEmp_id() + "");
+            holder.txtEmpId.setText(String.valueOf(employees.get(position).getEmp_id()));
             holder.txtEmpFName.setText(employees.get(position).getEmp_fname());
             holder.txtEmpLName.setText(employees.get(position).getEmp_lname());
             holder.txtEmpPhone.setText(employees.get(position).getEmp_phone());
             holder.txtEmpAddress.setText(employees.get(position).getEmp_address());
             holder.txtEmpDepName.setText(employees.get(position).getEmp_DepName());
 
+            //Button Employee Detail in Employee Activity RecyclerView
             holder.btnEditEmployee.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), UpdateEmployeeActivity.class);
 
-                    i.putExtra("extEmpId", employees.get(position).getEmp_id() + "");
-                    i.putExtra("extEmpFName", employees.get(position).getEmp_fname());
-                    i.putExtra("extEmpLName", employees.get(position).getEmp_lname());
-                    i.putExtra("extEmpPhone", employees.get(position).getEmp_phone());
-                    i.putExtra("extEmpAddress", employees.get(position).getEmp_address());
-                    i.putExtra("extEmpDepName", employees.get(position).getEmp_DepName());
-
+                    //Put EmployeeId to Extra
+                    i.putExtra("extEmpId", employees.get(position).getEmp_id());
 
                     v.getContext().startActivity(i);
                 }

@@ -168,7 +168,7 @@
             android:layout_marginRight="10dp"/>
 
         <Button
-            android:id="@+id/btnEditEmpDep"
+            android:id="@+id/btnUpdateEmpDep"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:textSize="8dp"
@@ -195,7 +195,7 @@
             android:layout_marginRight="10dp"/>
 
         <Button
-            android:id="@+id/btnEditEmpJob"
+            android:id="@+id/btnUpdateEmpJob"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:textSize="8dp"
