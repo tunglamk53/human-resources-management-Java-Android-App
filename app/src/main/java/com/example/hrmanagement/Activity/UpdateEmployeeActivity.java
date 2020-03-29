@@ -214,6 +214,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
 
         Button btnCancel = null;
         Button btnSave = null;
+        TextView txtButtonCreate = null;
 
         if(popupName.equals("department")) {
             alertDialogBuilder.setTitle("Update Employee's Department");
@@ -221,6 +222,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
             popupView = popupLayoutInflater.inflate(R.layout.pop_up_update_emp_dep, null);
             btnCancel = popupView.findViewById(R.id.btnCancelPopDep);
             btnSave = popupView.findViewById(R.id.btnSavePopDep);
+            txtButtonCreate = popupView.findViewById(R.id.txtCreateNewDep);
 
             //Set Spinner for Departments
             setSpinnerDepartment();
@@ -229,6 +231,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
             popupView = popupLayoutInflater.inflate(R.layout.pop_up_update_emp_job, null);
             btnCancel = popupView.findViewById(R.id.btnCancelPopJob);
             btnSave = popupView.findViewById(R.id.btnSavePopJob);
+            txtButtonCreate = popupView.findViewById(R.id.txtCreateNewJob);
 
             //Set Spinner for Departments
             setSpinnerJob();
@@ -279,6 +282,20 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
                 } else {}
             }
         });
+
+        //Button TextView Create in Popup
+        txtButtonCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupName.equals("department")) {
+                    startActivity(new Intent(v.getContext(), DepartmentActivity.class));
+                } else if (popupName.equals("job")) {
+                    startActivity(new Intent(v.getContext(), JobTitleActivity.class));
+                } else { }
+
+            }
+        });
+
     }
 
 
