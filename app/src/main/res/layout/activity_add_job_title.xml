@@ -32,7 +32,8 @@
         android:layout_marginLeft="70dp"
         android:text="ADD JOB"
         android:textSize="15dp"
-        android:layout_marginBottom="150dp"/>
+        android:layout_marginBottom="150dp"
+        android:textColor="@color/colorPrimary"/>
 
 
     <include layout="@layout/footerlayout" />

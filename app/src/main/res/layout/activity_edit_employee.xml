@@ -172,7 +172,8 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:textSize="8dp"
-            android:text="UPDATE DEPARTMENT" />
+            android:text="UPDATE DEPARTMENT"
+            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
 
@@ -199,7 +200,8 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:textSize="8dp"
-            android:text="UPDATE JOB" />
+            android:text="UPDATE JOB"
+            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
 
@@ -209,7 +211,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        android:text="UPDATE INFO" />
+        android:text="UPDATE INFO"
+        android:textColor="@color/colorPrimary"/>
 
     <include layout="@layout/footerlayout"/>
 
