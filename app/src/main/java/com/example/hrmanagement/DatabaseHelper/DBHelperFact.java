@@ -57,7 +57,14 @@ public class DBHelperFact implements ServiceFact {
     }
 
     @Override
-    public boolean updateFact(Fact fact) { return false; }
+    public void updateFact(Fact newFactInfo) {
+        setContentValues(newFactInfo);
+        mDb.update(
+                SchemaFact.TABLE_FACT,
+                getContentValues(),
+                SchemaEmployee.COLUMN_EMP_ID + " = ? ",
+                new String[] { String.valueOf(newFactInfo.getEmp_id()) });
+    }
 
     @Override
     public boolean deleteFact(int emp_id, int dep_id, int doc_id, int job_id) {
@@ -82,6 +89,20 @@ public class DBHelperFact implements ServiceFact {
         values.put(SchemaFact.COLUMN_FACT_SALARY, salary);
         values.put(SchemaFact.COLUMN_FACT_HOURLY_RATE, hourlyRate);
         mDb.update(SchemaFact.TABLE_FACT, values, SchemaEmployee.COLUMN_EMP_ID + " = ? ", new String[] { String.valueOf(emp_id) });
+    }
+
+    //Update DepartmentId by EmployeeId on Fact Table
+    public void updateFactDepartmentId(int emp_id, int dep_id) {
+        ContentValues valueDepId = new ContentValues();
+        valueDepId.put(SchemaDepartment.COLUMN_DEP_ID, dep_id);
+        mDb.update(SchemaFact.TABLE_FACT, valueDepId, SchemaEmployee.COLUMN_EMP_ID + " = ? ", new String[] { String.valueOf(emp_id) });
+    }
+
+    //Update JobId by EmployeeId on Fact Table
+    public void updateFactJobId(int emp_id, int job_id) {
+        ContentValues valueJobId = new ContentValues();
+        valueJobId.put(SchemaJob.COLUMN_JOB_ID, job_id);
+        mDb.update(SchemaFact.TABLE_FACT, valueJobId, SchemaEmployee.COLUMN_EMP_ID + " = ? ", new String[] { String.valueOf(emp_id) });
     }
 
     //Update Employment Status by EmployeeId on Fact Table

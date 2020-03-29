@@ -132,12 +132,13 @@ public class EmployeeActivity extends AppCompatActivity {
 
 //------------------------------------------------------------------------------------------------------------
     private void addDataToFactTable(long empId) {
-        //Add DepartmentId
+        //Get Selected DepartmentId from Dep Spinner
         String selectedDep = spnDepNames.getSelectedItem().toString();
         String selectedDepId = selectedDep.split(" - ")[0];
-        //Add JobId
+        //Get Selected JobId from Job Spinner
         String selectedJob = spnJobTitles.getSelectedItem().toString();
         String selectedJobId = selectedJob.split(" - ")[0];
+
         //Add Active Status for EmploymentStatus
         int activeStatus = 1;
 
@@ -146,7 +147,7 @@ public class EmployeeActivity extends AppCompatActivity {
         //Initialize Fact Database Helper
         dbHelperFact = new DBHelperFact(mDb);
 
-        //Add Data to Fact Table
+        //Add Employee Data (EmpId, DepId, JobId, ActiveStatus) to Fact Table
         dbHelperFact.addFact(fact);
     }
 
@@ -183,7 +184,7 @@ public class EmployeeActivity extends AppCompatActivity {
     }
 
 
-
+    //Display Employee RecyclerView
     private void displayRVEmployeeTable() {
         empDepNamesList = dbHelperEmployee.fetchAllEmployeesDepNames();
         setRVAdapterEmployee(empDepNamesList);

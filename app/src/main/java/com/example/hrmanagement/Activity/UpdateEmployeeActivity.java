@@ -1,15 +1,19 @@
 package com.example.hrmanagement.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -26,6 +30,8 @@ import com.example.hrmanagement.Entity.Job;
 import com.example.hrmanagement.MainActivity;
 import com.example.hrmanagement.R;
 
+import java.util.ArrayList;
+
 public class UpdateEmployeeActivity extends AppCompatActivity {
 
     private EditText edtFName, edtLName, edtPhone, edtAddress, edtSalary, edtHourlyRate;
@@ -37,6 +43,17 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
     private DBHelperDepartment dbHelperDepartment;
     private SQLiteDatabase mDb;
     private final int ACTIVE = 1, INACTIVE = 0;
+    private int empId;
+
+    private AlertDialog.Builder alertDialogBuilder;
+    private LayoutInflater popupLayoutInflater;
+    private AlertDialog alertDialog;
+    private View popupView;
+
+    private Department currentDepartment;
+    private Job currentJob;
+
+    private Spinner spnJobList, spnDepList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +76,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
         //Get Intent from EmployeeActivity
         Intent intent = getIntent();
         //Key EmployeeId
-        final int empId = Integer.parseInt(intent.getStringExtra("extEmpId"));
+        empId = intent.getIntExtra("extEmpId", 0);
 
 
         //Fetch Employee by EmployeeId
@@ -88,7 +105,23 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
         //Switch Button
         final Switch swiEmpStatus = findViewById(R.id.swiEditEmpStatus);
 
+        //Button Update EmployeeDepartment
+        Button btnUpdateEmpDep = findViewById(R.id.btnUpdateEmpDep);
+        btnUpdateEmpDep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createPopUp("department");
+            }
+        });
 
+        //Button Update EmployeeJob
+        Button btnUpdateEmpJob = findViewById(R.id.btnUpdateEmpJob);
+        btnUpdateEmpJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createPopUp("job");
+            }
+        });
 
         //Fetch A Fact Row by EmployeeId
         Fact fact = dbHelperFact.fetchFactById(empId);
@@ -122,19 +155,10 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
         });
 
 
-
-        //Fetch EmployeeDepartment by EmployeeId
-        Department department = dbHelperDepartment.fetchDepartmentByEmpId(empId);
-        //Display Department by EmployeeId
-        txtDepartment.setText(department.getDep_name() + " (" + department.getDep_location() + ")");
-
-
-
-        //Fetch EmployeeJob by EmployeeId
-        Job job = dbHelperJob.fetchJobByEmpId(empId);
-        //Display Job by EmployeeId
-        txtJob.setText(job.getJob_title() + " (" + job.getJob_description() + ")");
-
+        //Get and Display EmployeeDepartment by EmployeeId
+        displayEmpDep();
+        //Get and Display EmployeeJob by EmployeeId (on job TextView)
+        displayEmpJob();
 
 
 
@@ -176,5 +200,143 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
                 startActivity(new Intent(UpdateEmployeeActivity.this, MainActivity.class));
             }
         });
+    }
+
+
+
+
+
+
+    private void createPopUp(final String popupName) {
+        alertDialogBuilder = new AlertDialog.Builder(UpdateEmployeeActivity.this);
+        alertDialogBuilder.setCancelable(false);
+        popupLayoutInflater = LayoutInflater.from(UpdateEmployeeActivity.this);
+
+        Button btnCancel = null;
+        Button btnSave = null;
+
+        if(popupName.equals("department")) {
+            alertDialogBuilder.setTitle("Update Employee's Department");
+            //Get View from Popup
+            popupView = popupLayoutInflater.inflate(R.layout.pop_up_update_emp_dep, null);
+            btnCancel = popupView.findViewById(R.id.btnCancelPopDep);
+            btnSave = popupView.findViewById(R.id.btnSavePopDep);
+
+            //Set Spinner for Departments
+            setSpinnerDepartment();
+        } else if (popupName.equals("job")) {
+            alertDialogBuilder.setTitle("Update Employee's Job Title");
+            popupView = popupLayoutInflater.inflate(R.layout.pop_up_update_emp_job, null);
+            btnCancel = popupView.findViewById(R.id.btnCancelPopJob);
+            btnSave = popupView.findViewById(R.id.btnSavePopJob);
+
+            //Set Spinner for Departments
+            setSpinnerJob();
+        } else { }
+
+        if(popupView != null) { alertDialogBuilder.setView(popupView); }
+
+        //Create and Show Popup
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+
+        //Button Cancel in Popup
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+
+        //Button Save in Popup
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(popupName.equals("department")) {
+                    //Get Selected DepartmentId from Dep Spinner
+                    String selectedDepId = spnDepList.getSelectedItem().toString().split(" - ")[0];
+                    //Update DepartmentId on Fact Table
+                    dbHelperFact.updateFactDepartmentId(empId, Integer.parseInt(selectedDepId));
+
+                    //Close Popup Department
+                    alertDialog.cancel();
+
+                    //Change Department TexView (after Updated Department)
+                    displayEmpDep();
+
+                } else if (popupName.equals("job")) {
+                    //Get Selected JobId from Job Spinner
+                    String selectedJobId = spnJobList.getSelectedItem().toString().split(" - ")[0];
+                    //Update JobId on Fact Table
+                    dbHelperFact.updateFactJobId(empId, Integer.parseInt(selectedJobId));
+
+                    //Close Popup Job
+                    alertDialog.cancel();
+
+                    //Change Department TexView (after Updated Department)
+                    displayEmpJob();
+                } else {}
+            }
+        });
+    }
+
+
+    //Set Spinner for Departments
+    private void setSpinnerDepartment() {
+        ArrayList<String> spnStringListDep = new ArrayList<>();
+
+        //Fetch all departments from Department Table
+        ArrayList<Department> departments = dbHelperDepartment.fetchAllDepartments();
+
+        if(departments!=null) {
+            for (Department dep : departments) {
+                spnStringListDep.add(dep.getDep_id() + " - " + dep.getDep_name());
+            }
+        }
+
+        spnDepList = popupView.findViewById(R.id.spnUpdateEmpDep);
+        ArrayAdapter<String> adapterDepartment = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spnStringListDep);
+        spnDepList.setAdapter(adapterDepartment);
+
+        //Set Spinner with Current Department (before update)
+        spnDepList.setSelection(spnStringListDep.indexOf(currentDepartment.getDep_id() + " - " + currentDepartment.getDep_name()));
+    }
+
+    //Set Spinner for Jobs
+    private void setSpinnerJob() {
+        ArrayList<String> spnStringListJob = new ArrayList<>();
+
+        //Fetch all departments from Department Table
+        ArrayList<Job> jobs = dbHelperJob.fetchAllJobs();
+
+        if(jobs!=null) {
+            for (Job job : jobs) {
+                spnStringListJob.add(job.getJob_id() + " - " + job.getJob_title());
+            }
+        }
+
+        spnJobList = popupView.findViewById(R.id.spnUpdateEmpJob);
+        ArrayAdapter<String> adapterJob = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spnStringListJob);
+        spnJobList.setAdapter(adapterJob);
+
+        //Set Spinner with Current Department (before update)
+        spnJobList.setSelection(spnStringListJob.indexOf(currentJob.getJob_id() + " - " + currentJob.getJob_title()));
+    }
+
+    //Get and Display EmployeeDepartment by EmployeeId (on department TextView)
+    private void displayEmpDep(){
+        //Fetch EmployeeDepartment by EmployeeId
+        currentDepartment = dbHelperDepartment.fetchDepartmentByEmpId(empId);
+        //Display Department by EmployeeId
+        txtDepartment.setText(currentDepartment.getDep_name() + " (" + currentDepartment.getDep_location() + ")");
+    }
+
+    //Get and Display EmployeeJob by EmployeeId (on job TextView)
+    private void displayEmpJob(){
+        //Fetch EmployeeJob by EmployeeId
+        currentJob = dbHelperJob.fetchJobByEmpId(empId);
+        //Display Job by EmployeeId
+        txtJob.setText(currentJob.getJob_title() + " (" + currentJob.getJob_description() + ")");
     }
 }
