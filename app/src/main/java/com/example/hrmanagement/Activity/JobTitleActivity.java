@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hrmanagement.DatabaseController.DatabaseInitialization;
+import com.example.hrmanagement.DatabaseController.DatabaseOperation;
 import com.example.hrmanagement.DatabaseHelper.DBHelperJob;
 import com.example.hrmanagement.Entity.Job;
 import com.example.hrmanagement.MainActivity;
@@ -17,8 +18,7 @@ import com.example.hrmanagement.R;
 
 public class JobTitleActivity extends AppCompatActivity {
 
-    private SQLiteDatabase wdb, rdb;
-    private DatabaseInitialization databaseInitialization;
+    private SQLiteDatabase mDb;
     private DBHelperJob dbHelperJob;
     private Job job;
 
@@ -28,11 +28,11 @@ public class JobTitleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_job_title);
 
-        databaseInitialization = new DatabaseInitialization(this);
-        wdb = databaseInitialization.getWritableDatabase();
-        rdb = databaseInitialization.getReadableDatabase();
+        //Open Database
+        DatabaseOperation databaseOperation = new DatabaseOperation(this);
+        mDb = databaseOperation.openDb();
 
-        dbHelperJob = new DBHelperJob(rdb);
+        dbHelperJob = new DBHelperJob(mDb);
 
         Button btnAddJob = findViewById(R.id.btnAddJob);
         btnAddJob.setOnClickListener(new View.OnClickListener() {

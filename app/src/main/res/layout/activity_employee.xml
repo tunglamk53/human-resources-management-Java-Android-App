@@ -1,107 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.EmployeeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rViewEmployee"
         android:layout_width="match_parent"
-        android:layout_height="174dp"
-        android:layout_marginBottom="10dp"/>
-
-    <Button
-        android:id="@+id/btnAddEmp"
-        android:layout_width="150sp"
-        android:layout_height="40sp"
-        android:text="ADD EMPLOYEE"
-        android:layout_gravity="center"
-        android:textSize="10dp"
-        android:textColor="@color/colorPrimary"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/cardViewEmp"/>
 
 
-    <EditText
-        android:id="@+id/edtFName1"
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="FIRST NAME"
-        android:inputType="text"
-        android:textSize="12dp"/>
+        android:layout_alignParentBottom="true"
+        android:id="@+id/cardViewEmp">
 
-    <EditText
-        android:id="@+id/edtLName1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="LAST NAME"
-        android:inputType="text"
-        android:textSize="12dp"/>
 
-    <EditText
-        android:id="@+id/edtPhone1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="PHONE"
-        android:digits="0123456789"
-        android:maxLength="13"
-        android:textSize="12dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edtAddress1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ADDRESS"
-        android:inputType="text"
-        android:textSize="12dp"/>
+            <Button
+                android:id="@+id/btnAddEmp"
+                android:layout_width="150sp"
+                android:layout_height="40sp"
+                android:text="ADD EMPLOYEE"
+                android:layout_gravity="center"
+                android:textSize="11dp"
+                android:textColor="@color/colorPrimary"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
 
-        <TextView
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:text="DEPARTMENT ID:"
-            android:textSize="15dp"
-            android:gravity="right"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-        <Spinner
-            android:id="@+id/spnDepNames"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/edtFName1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="FIRST NAME"
+                    android:inputType="text"
+                    android:textSize="11dp"
+                    android:layout_weight="0.5"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/edtLName1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="LAST NAME"
+                    android:inputType="text"
+                    android:textSize="11dp"
+                    android:layout_weight="0.5"/>
 
-        <TextView
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:text="JOB TITLE:"
-            android:textSize="15dp"
-            android:gravity="right"/>
 
-        <Spinner
-            android:id="@+id/spnJobTitles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/edtPhone1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="PHONE"
+                android:digits="0123456789"
+                android:maxLength="13"
+                android:textSize="11dp"/>
 
-    <TextView
-        android:id="@+id/txtAddJobTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="@string/add_job_title_text"
-        android:textSize="11dp" />
+            <EditText
+                android:id="@+id/edtAddress1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ADDRESS"
+                android:inputType="text"
+                android:textSize="11dp"/>
 
-    <include layout="@layout/footerlayout"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center|right"
+                    android:text="DEPARTMENT ID:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="11dp" />
+
+                <Spinner
+                    android:id="@+id/spnDepNames"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scrollbarSize="1dp"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center|right"
+                    android:text="JOB TITLE:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="11dp" />
+
+                <Spinner
+                    android:id="@+id/spnJobTitles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbarSize="1dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtAddJobTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/add_job_title_text"
+                android:textSize="11dp"
+                android:textStyle="italic"/>
+
+            <include layout="@layout/footerlayout"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>

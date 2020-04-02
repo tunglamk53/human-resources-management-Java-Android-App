@@ -7,32 +7,37 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="259dp"
+        app:srcCompat="@drawable/hr_img" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MAIN PAGE"
-        android:textSize="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        />
+        android:text="HR MANAGEMENT"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40dp" />
 
     <Button
         android:id="@+id/btnViewEmp"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="60dp"
-        android:text="VIEW EMPLOYEE" />
+        android:text="VIEW EMPLOYEE"
+        android:textColor="@color/colorAccent"/>
 
     <Button
         android:id="@+id/btnViewDep"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:text="VIEW DEPARTMENT" />
+        android:text="VIEW DEPARTMENT"
+        android:textColor="@color/colorAccent"/>
 
 
 </LinearLayout>
