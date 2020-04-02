@@ -18,8 +18,11 @@
 
             <TextView
                 android:gravity="end"
-                android:text="Job : "
-                android:textSize="20dp"/>
+                android:text="Job Title: "
+                android:textSize="11dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_gravity="center"
+                android:textStyle="bold"/>
 
             <Spinner
                 android:id="@+id/spnUpdateEmpJob" />
@@ -32,33 +35,35 @@
             android:layout_height="wrap_content"
             android:text="@string/add_job_title_text"
             android:gravity="center"
-            android:layout_marginBottom="10dp"/>
+            android:textStyle="italic"
+            android:layout_marginBottom="10dp"
+            android:textSize="11dp"/>
 
 
         <TableRow android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/btnCancelPopJob"
-                android:layout_width="80sp"
+                android:layout_width="80dp"
                 android:layout_height="40sp"
                 android:text="Cancel"
-                android:textSize="15dp"
-                android:textAllCaps="false"
+                android:textSize="11dp"
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/colorAccent"
+                android:textAlignment="center"/>
 
 
             <Button
                 android:id="@+id/btnSavePopJob"
-                android:layout_width="80sp"
+                android:layout_width="80dp"
                 android:layout_height="40sp"
                 android:text="Save"
-                android:textSize="15dp"
-                android:textAllCaps="false"
+                android:textSize="11dp"
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"/>
 
         </TableRow>
 

@@ -6,6 +6,7 @@ public interface SchemaFact {
     static final String COLUMN_FACT_HOURLY_RATE = "hourly_rate";
     static final String COLUMN_FACT_EMP_STATUS = "employment_status"; // 0 = Quited; 1 = Active.
 
+    static final int EMP_ACTIVE = 1, EMP_INACTIVE = 0;
 
     public static final String SQL_CREATE_FACT = "CREATE TABLE IF NOT EXISTS "
             + TABLE_FACT

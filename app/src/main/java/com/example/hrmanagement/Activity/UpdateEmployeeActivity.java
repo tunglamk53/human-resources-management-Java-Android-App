@@ -29,6 +29,7 @@ import com.example.hrmanagement.Entity.Fact;
 import com.example.hrmanagement.Entity.Job;
 import com.example.hrmanagement.MainActivity;
 import com.example.hrmanagement.R;
+import com.example.hrmanagement.TableSchema.SchemaFact;
 
 import java.util.ArrayList;
 
@@ -36,13 +37,11 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
 
     private EditText edtFName, edtLName, edtPhone, edtAddress, edtSalary, edtHourlyRate;
     private TextView txtEmpId, txtDepartment, txtJob;
-    private DatabaseInitialization databaseInitialization;
     private DBHelperFact dbHelperFact;
     private DBHelperEmployee dbHelperEmployee;
     private DBHelperJob dbHelperJob;
     private DBHelperDepartment dbHelperDepartment;
     private SQLiteDatabase mDb;
-    private final int ACTIVE = 1, INACTIVE = 0;
     private int empId;
 
     private AlertDialog.Builder alertDialogBuilder;
@@ -54,6 +53,12 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
     private Job currentJob;
 
     private Spinner spnJobList, spnDepList;
+
+    private final String DEPARTMENT_ACTION = "department";
+    private final String JOB_ACTION = "job";
+
+    private final String DEPARTMENT_POPUP_TITLE = "Update Employee's Department";
+    private final String JOB_POPUP_TITLE = "Update Employee's Job Title";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,10 +151,10 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     swiEmpStatus.setText("Active");
-                    dbHelperFact.updateFactEmpStatus(empId, ACTIVE);
+                    dbHelperFact.updateFactEmpStatus(empId, SchemaFact.EMP_ACTIVE);
                 } else {
                     swiEmpStatus.setText("Inactive");
-                    dbHelperFact.updateFactEmpStatus(empId, INACTIVE);
+                    dbHelperFact.updateFactEmpStatus(empId, SchemaFact.EMP_INACTIVE);
                 }
             }
         });
@@ -216,8 +221,8 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
         Button btnSave = null;
         TextView txtButtonCreate = null;
 
-        if(popupName.equals("department")) {
-            alertDialogBuilder.setTitle("Update Employee's Department");
+        if(popupName.equals(DEPARTMENT_ACTION)) {
+            alertDialogBuilder.setTitle(DEPARTMENT_POPUP_TITLE);
             //Get View from Popup
             popupView = popupLayoutInflater.inflate(R.layout.pop_up_update_emp_dep, null);
             btnCancel = popupView.findViewById(R.id.btnCancelPopDep);
@@ -226,8 +231,10 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
 
             //Set Spinner for Departments
             setSpinnerDepartment();
-        } else if (popupName.equals("job")) {
-            alertDialogBuilder.setTitle("Update Employee's Job Title");
+
+        } else if (popupName.equals(JOB_ACTION)) {
+            alertDialogBuilder.setTitle(JOB_POPUP_TITLE);
+            //Get View from Popup
             popupView = popupLayoutInflater.inflate(R.layout.pop_up_update_emp_job, null);
             btnCancel = popupView.findViewById(R.id.btnCancelPopJob);
             btnSave = popupView.findViewById(R.id.btnSavePopJob);
@@ -235,6 +242,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
 
             //Set Spinner for Departments
             setSpinnerJob();
+
         } else { }
 
         if(popupView != null) { alertDialogBuilder.setView(popupView); }
@@ -256,7 +264,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(popupName.equals("department")) {
+                if(popupName.equals(DEPARTMENT_ACTION)) {
                     //Get Selected DepartmentId from Dep Spinner
                     String selectedDepId = spnDepList.getSelectedItem().toString().split(" - ")[0];
                     //Update DepartmentId on Fact Table
@@ -268,7 +276,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
                     //Change Department TexView (after Updated Department)
                     displayEmpDep();
 
-                } else if (popupName.equals("job")) {
+                } else if (popupName.equals(JOB_ACTION)) {
                     //Get Selected JobId from Job Spinner
                     String selectedJobId = spnJobList.getSelectedItem().toString().split(" - ")[0];
                     //Update JobId on Fact Table
@@ -287,9 +295,9 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
         txtButtonCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (popupName.equals("department")) {
+                if (popupName.equals(DEPARTMENT_ACTION)) {
                     startActivity(new Intent(v.getContext(), DepartmentActivity.class));
-                } else if (popupName.equals("job")) {
+                } else if (popupName.equals(JOB_ACTION)) {
                     startActivity(new Intent(v.getContext(), JobTitleActivity.class));
                 } else { }
 

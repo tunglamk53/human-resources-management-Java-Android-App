@@ -35,8 +35,8 @@
       <list>
         <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -48,8 +48,9 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Nexus_5_API_29" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-03-28T00:09:56.896Z" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -60,11 +61,11 @@
       <recent name="com.example.hrmanagement" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HOME_DESKTOP\Desktop\HR-Management\human-resources-management-Java-Android-App\app\src\main\res\drawable-v24" />
+      <recent name="C:\Users\HOME_DESKTOP\Desktop\HR-Management\human-resources-management-Java-Android-App\app\src\main\res\drawable" />
       <recent name="C:\Users\HOME_DESKTOP\Desktop\HR-Management\human-resources-management-Java-Android-App\app\src\main\res\layout" />
       <recent name="C:\Users\HOME_DESKTOP\Desktop\HR-Management\human-resources-management-Java-Android-App\app\src\main\java\com\example\hrmanagement" />
       <recent name="C:\Users\HOME_DESKTOP\Desktop\HR-Management\human-resources-management-Java-Android-App\app\src\main\java\com\example\hrmanagement\Entity" />
-      <recent name="C:\Users\HOME_DESKTOP\Desktop\HR-Management\human-resources-management-Java-Android-App\app\src\main\java\com\example\hrmanagement\DatabaseHelper" />
-      <recent name="C:\Users\HOME_DESKTOP\Desktop\group-project-01\group-project\app\src\main\res\layout" />
     </key>
   </component>
   <component name="RunDashboard">
