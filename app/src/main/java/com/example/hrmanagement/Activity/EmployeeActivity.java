@@ -26,6 +26,7 @@ import com.example.hrmanagement.Entity.Fact;
 import com.example.hrmanagement.Entity.Job;
 import com.example.hrmanagement.MainActivity;
 import com.example.hrmanagement.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class EmployeeActivity extends AppCompatActivity {
     private SQLiteDatabase mDb;
     private RecyclerView recyclerView;
     private EmpRVAdapter empRVAdapter;
-    ArrayList<Employee> empDepNamesList;
+    private ArrayList<Employee> empDepNamesList;
     private DBHelperEmployee dbHelperEmployee;
     private DBHelperDepartment dbHelperDepartment;
     private DBHelperJob dbHelperJob;
@@ -116,9 +117,14 @@ public class EmployeeActivity extends AppCompatActivity {
         });
 
 
-
-
-
+        //Floating Expand Employee List Bigger
+        FloatingActionButton floatingButton = findViewById(R.id.fltBtnExpandEmployee);
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EmployeeActivity.this, ExpandEmployeeActivity.class));
+            }
+        });
     }//-----------------------------------------------------------------------------------------------------------
 
 

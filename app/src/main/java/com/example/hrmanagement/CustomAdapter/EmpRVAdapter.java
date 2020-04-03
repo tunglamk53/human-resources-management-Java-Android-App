@@ -1,16 +1,25 @@
 package com.example.hrmanagement.CustomAdapter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hrmanagement.Activity.EmployeeActivity;
 import com.example.hrmanagement.Activity.UpdateEmployeeActivity;
+import com.example.hrmanagement.DatabaseController.DatabaseOperation;
+import com.example.hrmanagement.DatabaseHelper.DBHelperEmployee;
+import com.example.hrmanagement.DatabaseHelper.DBHelperFact;
 import com.example.hrmanagement.Entity.Employee;
 import com.example.hrmanagement.R;
 
@@ -19,6 +28,8 @@ import java.util.ArrayList;
 public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> {
 
     private ArrayList<Employee> employees;
+    private DBHelperEmployee dbHelperEmployee;
+    private DBHelperFact dbHelperFact;
 
     public EmpRVAdapter(ArrayList<Employee> employees) {
         this.employees = employees;
@@ -53,6 +64,49 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
                     v.getContext().startActivity(i);
                 }
             });
+
+            //Button Delete Employee
+            holder.btnDeleteEmployee.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    DatabaseOperation databaseOperation = new DatabaseOperation(v.getContext());
+                    SQLiteDatabase mDb = databaseOperation.openDb();
+                    dbHelperEmployee = new DBHelperEmployee(mDb);
+                    dbHelperFact = new DBHelperFact(mDb);
+
+                    final boolean[] deletedEmployee = {false};
+
+
+
+
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    deletedEmployee[0] = dbHelperEmployee.deleteEmployee(employees.get(position).getEmp_id());
+                                    deletedEmployee[0] = dbHelperFact.deleteFact(employees.get(position).getEmp_id());
+                                    Intent i = new Intent(v.getContext(), EmployeeActivity.class);
+                                    v.getContext().startActivity(i);
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setMessage("Do you want to Delete employee below? \n\n" + "\t\t\tName: "
+                            + employees.get(position).getEmp_lname() + ", " + employees.get(position).getEmp_fname()
+                            + "\n\t\t\tID: " + employees.get(position).getEmp_id()
+                            + "\n\t\t\tDepartment: " + employees.get(position).getEmp_DepName())
+                            .setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
+
+                }
+            });
         }catch (Exception e){
 
         }
@@ -70,20 +124,25 @@ public class EmpRVAdapter extends RecyclerView.Adapter<EmpRVAdapter.ViewHolder> 
 //    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 public class ViewHolder extends RecyclerView.ViewHolder {
     private TextView txtEmpId, txtEmpFName, txtEmpLName, txtEmpPhone, txtEmpAddress, txtEmpDepName;
-        private Button btnEditEmployee;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtEmpId = itemView.findViewById(R.id.txtEmpId);
-            txtEmpFName = itemView.findViewById(R.id.txtEmpFName);
-            txtEmpLName = itemView.findViewById(R.id.txtEmpLName);
-            txtEmpPhone = itemView.findViewById(R.id.txtEmpPhone);
-            txtEmpAddress = itemView.findViewById(R.id.txtEmpAddress);
-            txtEmpDepName = itemView.findViewById(R.id.txtEmpDepName);
+    private Button btnEditEmployee;
+    private TextView btnDeleteEmployee;
 
-            //set up BUTTON Edit Employee Info
-            btnEditEmployee = itemView.findViewById(R.id.btnEditEmp);
+    public ViewHolder(@NonNull View itemView) {
+        super(itemView);
+        txtEmpId = itemView.findViewById(R.id.txtEmpId);
+        txtEmpFName = itemView.findViewById(R.id.txtEmpFName);
+        txtEmpLName = itemView.findViewById(R.id.txtEmpLName);
+        txtEmpPhone = itemView.findViewById(R.id.txtEmpPhone);
+        txtEmpAddress = itemView.findViewById(R.id.txtEmpAddress);
+        txtEmpDepName = itemView.findViewById(R.id.txtEmpDepName);
+
+        //set up BUTTON Edit Employee Info
+        btnEditEmployee = itemView.findViewById(R.id.btnEditEmp);
 //            btnEditEmployee.setOnClickListener(this);
-        }
+
+        //Button Delete Employee
+        btnDeleteEmployee = itemView.findViewById(R.id.txtBtnDeleteEmp);
+    }
 
 //        @Override
 //        public void onClick(View v) {
@@ -93,7 +152,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 //            }
 //        }
     }
-
 
 
 

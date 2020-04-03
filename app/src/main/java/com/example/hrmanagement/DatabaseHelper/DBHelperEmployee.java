@@ -89,7 +89,7 @@ public class DBHelperEmployee implements ServiceEmployee {
     //Delete An Employee by Id
     @Override
     public boolean deleteEmployee(int employeeId) {
-        return false;
+        return mDb.delete(SchemaEmployee.TABLE_EMPLOYEE, SchemaEmployee.COLUMN_EMP_ID + "=?", new String[] { String.valueOf(employeeId) }) > 0;
     }
 
     //Update New Employee Information

@@ -3,4 +3,10 @@
     <string name="add_job_title_text">(Not found the Job Title)\n<u>Click here to add new a new Job title</u>.</string>
     <string name="add_dep_title_text">(Not found the Department)\n<u>Click here to add new a new Department</u>.</string>
     <string name="text_delete_employee"><u>DELETE</u></string>
+    <string-array name="arraySortBy">
+        <item>ID</item>
+        <item>Name</item>
+        <item>Department</item>
+        <item>Address</item>
+    </string-array>
 </resources>

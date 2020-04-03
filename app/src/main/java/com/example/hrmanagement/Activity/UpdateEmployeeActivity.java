@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hrmanagement.DatabaseController.DatabaseInitialization;
 import com.example.hrmanagement.DatabaseController.DatabaseOperation;
@@ -167,7 +168,7 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
 
 
 
-        //Update Employee Info Button
+        //Button Update Employee Information
         Button btnUpdateEmployeeInfo = findViewById(R.id.btnUpdateEmployee);
         btnUpdateEmployeeInfo.setOnClickListener(new View.OnClickListener() {
             @Override

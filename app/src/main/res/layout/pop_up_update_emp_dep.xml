@@ -46,25 +46,20 @@
                 android:id="@+id/btnCancelPopDep"
                 android:layout_width="80sp"
                 android:layout_height="40sp"
-                android:text="Cancel"
-                android:textSize="11dp"
-                android:gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
+                android:text="Cancel"
                 android:textColor="@color/colorAccent"
-                android:textAlignment="center"
-                />
+                android:textSize="11dp" />
 
 
             <Button
                 android:id="@+id/btnSavePopDep"
                 android:layout_width="80sp"
                 android:layout_height="40sp"
-                android:text="Save"
-                android:textSize="11dp"
-                android:gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
+                android:text="Save"
                 android:textColor="@color/colorPrimary"
-                android:textAlignment="center"/>
+                android:textSize="11dp" />
 
         </TableRow>
 

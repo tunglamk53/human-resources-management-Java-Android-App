@@ -66,9 +66,11 @@ public class DBHelperFact implements ServiceFact {
                 new String[] { String.valueOf(newFactInfo.getEmp_id()) });
     }
 
+    //Delete Fact by EmployeeId
     @Override
-    public boolean deleteFact(int emp_id, int dep_id, int doc_id, int job_id) {
-        return false;
+    public boolean deleteFact(int employeeId) {
+        return mDb.delete(SchemaFact.TABLE_FACT, SchemaEmployee.COLUMN_EMP_ID + "=?", new String[] { String.valueOf(employeeId) }) > 0;
+
     }
 
     //Add a Fact
