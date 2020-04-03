@@ -14,10 +14,26 @@
         android:id="@+id/rViewEmployee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_above="@id/cardViewEmp"
         android:layout_alignParentTop="true"
-        android:layout_above="@id/cardViewEmp"/>
+        android:layout_marginBottom="10dp" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fltBtnExpandEmployee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:backgroundTint="#FFFFFF"
+            app:fabSize="mini"
+            app:maxImageSize="20dp"
+            app:srcCompat="@drawable/ic_view_employee"/>
+
+    </RelativeLayout>
 
 
     <androidx.cardview.widget.CardView
@@ -105,6 +121,7 @@
                     android:layout_height="match_parent"
                     android:scrollbarSize="1dp"
                     android:spinnerMode="dropdown" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -128,6 +145,7 @@
 
             </LinearLayout>
 
+
             <TextView
                 android:id="@+id/txtAddJobTitle"
                 android:layout_width="match_parent"
@@ -136,6 +154,7 @@
                 android:text="@string/add_job_title_text"
                 android:textSize="11dp"
                 android:textStyle="italic"/>
+
 
             <include layout="@layout/footerlayout"/>
 

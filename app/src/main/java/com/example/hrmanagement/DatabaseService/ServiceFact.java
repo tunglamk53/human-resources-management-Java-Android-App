@@ -15,7 +15,7 @@ public interface ServiceFact {
 
     public boolean addFact(Fact fact);
 
-    public boolean deleteFact(int emp_id, int dep_id, int doc_id, int job_id);
+    public boolean deleteFact(int emp_id);
 
     public void updateFact(Fact fact);
 
