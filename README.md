@@ -1,2 +1,2 @@
-HR-Management-Java-Android-App
+HR-Management-Java-Android-App with SQLite Database
 # ON-GOING...
